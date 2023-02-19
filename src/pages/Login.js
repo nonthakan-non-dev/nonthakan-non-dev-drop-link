@@ -1,55 +1,93 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <div className="min-h-screen w-full flex flex-col justify-center items-center">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[95%] md:w-[60%] lg:w-[50%] xl:w-[40%]">
-        <div className="flex items-end justify-between mb-8">
-          <h1 className="font-bold text-2xl lg:text-4xl">Sign in</h1>
-          <p className="text-sm lg:text-lg">or <a className="font-bold text-blue-500 hover:text-blue-800" href="/">create an account</a></p>
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[95%] md:w-[60%] lg:w-[50%] xl:w-[35%]"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="flex items-center justify-center mb-8">
+          <div className="h-[65px] ">
+            <img
+              src={process.env.PUBLIC_URL + "/images/droplink-logo.png"}
+              alt=""
+              className="object-cover h-full w-auto"
+            />
+          </div>
+          <h1 className="text-2xl lg:text-4xl ml-4 select-none">Drop Link</h1>
         </div>
+
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
+          <label
+            className="block text-gray-700 text-sm mb-2"
+            for="email"
+          >
             Email
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="text"
-            placeholder="Email"
+            placeholder="name@gmail.com"
+            {...register("email", { required: true })}
           />
-          <p className="text-red-500 text-xs italic mt-3">Please choose a email.</p>
+          {errors.email && (
+            <p className="text-red-500 text-xs italic mt-3">
+              Please choose a email.
+            </p>
+          )}
         </div>
         <div className="mb-6">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm mb-2"
             for="password"
           >
             Password
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
-            placeholder="******************"
+            placeholder="••••••••"
+            {...register("password", { required: true })}
           />
-          <p className="text-red-500 text-xs italic mt-3">
-            Please choose a password.
-          </p>
+          {errors.email && (
+            <p className="text-red-500 text-xs italic mt-3">
+              Please choose a password.
+            </p>
+          )}
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-end">
           <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800"
             href="/"
           >
             Forgot Password?
           </a>
+        </div>
+        <div className="w-full mt-5">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline rounded-md"
+            type="submit"
           >
             Sign In
           </button>
+        </div>
+
+        <div className="flex items-center justify-center mt-8 text-sm ">
+          <p className="mr-2">Don't have an account?</p>
+          <a className="text-blue-500 hover:text-blue-800" href="/">
+            Sign up
+          </a>
         </div>
       </form>
     </div>

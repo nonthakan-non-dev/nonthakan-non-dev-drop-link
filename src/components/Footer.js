@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="min-w-full text-center py-2">
-      <p className="text-sm">Copyright © 2023 Nonthakan-Non-Dev by Nonthakn N.Lamphun.</p>
+      <p className="text-[12px] sm:text-sm">Copyright © 2023 Drop-Link by Nonthakn N.Lamphun.</p>
     </footer>
   );
 };
