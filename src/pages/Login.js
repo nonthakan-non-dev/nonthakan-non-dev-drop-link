@@ -34,7 +34,13 @@ function Login() {
             id="email"
             type="text"
             placeholder="name@gmail.com"
-            {...register("email", { required: 'Please type your email.' })}
+            {...register("email", {
+              required: "Please type your email.",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            })}
           />
           {errors.email && (
             <p className="text-red-500 text-xs italic mt-3">
@@ -43,7 +49,10 @@ function Login() {
           )}
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="password">
+          <label
+            className="block text-gray-700 text-sm mb-2"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
@@ -53,8 +62,14 @@ function Login() {
             placeholder="••••••••"
             {...register("password", {
               required: "Please type your password.",
-              minLength: { message: "Password has a minimum length of 6.", value: 6 },
-              maxLength: { message: "Password has a maximum length of 20.", value: 20 },
+              minLength: {
+                message: "Password has a minimum length of 6.",
+                value: 6,
+              },
+              maxLength: {
+                message: "Password has a maximum length of 20.",
+                value: 20,
+              },
             })}
           />
           {errors.password && (
