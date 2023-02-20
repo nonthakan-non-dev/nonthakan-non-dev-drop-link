@@ -29,7 +29,12 @@ const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    Swal.fire("Login failed", "Incorrect email or password.", "error");
+    Swal.fire({
+      title: "Login failed",
+      text: "Incorrect email or password.",
+      icon: "error",
+      confirmButtonColor: "#3B82F6",
+    });
   }
 };
 const registerWithEmailAndPassword = async (email, password) => {
@@ -41,8 +46,9 @@ const registerWithEmailAndPassword = async (email, password) => {
       uid: userId,
       email,
     });
+    return user;
   } catch (err) {
-    Swal.fire("Register failed", `${err.message}`, "question");
+    throw err;
   }
 };
 const sendPasswordReset = async (email) => {

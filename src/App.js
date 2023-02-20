@@ -14,6 +14,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Loading from "./pages/Loading";
 import LayoutAuth from "./components/LayoutAuth";
+import Register from "./pages/Register";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -48,6 +49,7 @@ function App() {
         <Layout>
           <Routes>
             <Route exact path="/" element={<Login />}></Route>
+            <Route exact path="/register" element={<Register />}></Route>
             <Route exact path="/*" element={<Page404 />}></Route>
           </Routes>
         </Layout>

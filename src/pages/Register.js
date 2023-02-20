@@ -1,8 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { logInWithEmailAndPassword } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { registerWithEmailAndPassword } from "../firebase";
 
-function Login() {
+function Register() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -10,8 +14,16 @@ function Login() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      await logInWithEmailAndPassword(data?.email, data?.password);
-    } catch (error) {}
+      await registerWithEmailAndPassword(data?.email, data?.password);
+      navigate("/", { replace: true })
+    } catch (error) {
+      Swal.fire({
+        title: "Register failed",
+        text: "Email already in use.",
+        icon: "error",
+        confirmButtonColor: "#3B82F6",
+      });
+    }
   };
 
   return (
@@ -84,27 +96,19 @@ function Login() {
             </p>
           )}
         </div>
-        <div className="flex items-center justify-end">
-          <a
-            className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800"
-            href="/"
-          >
-            Forgot Password?
-          </a>
-        </div>
         <div className="w-full mt-5">
           <button
             className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline rounded-md"
             type="submit"
           >
-            Login
+            Register
           </button>
         </div>
 
         <div className="flex items-center justify-center mt-8 text-sm ">
-          <p className="mr-2">Don't have an account?</p>
-          <a className="text-blue-500 hover:text-blue-800" href="/register">
-            Register
+          <p className="mr-2">Already have an account?</p>
+          <a className="text-blue-500 hover:text-blue-800" href="/">
+            Login
           </a>
         </div>
       </form>
@@ -112,4 +116,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

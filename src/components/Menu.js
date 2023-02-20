@@ -41,6 +41,7 @@ const Menus = () => {
             className="w-full flex items-center"
             onClick={() => {
               logout();
+              navigate("/", { replace: true })
               window.location.reload(false);
             }}
           >
