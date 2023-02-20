@@ -27,10 +27,7 @@ function Login() {
         </div>
 
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm mb-2"
-            for="email"
-          >
+          <label className="block text-gray-700 text-sm mb-2" for="email">
             Email
           </label>
           <input
@@ -38,19 +35,16 @@ function Login() {
             id="email"
             type="text"
             placeholder="name@gmail.com"
-            {...register("email", { required: true })}
+            {...register("email", { required: 'Please type your email.' })}
           />
           {errors.email && (
             <p className="text-red-500 text-xs italic mt-3">
-              Please choose a email.
+              {errors?.email?.message}
             </p>
           )}
         </div>
         <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm mb-2"
-            for="password"
-          >
+          <label className="block text-gray-700 text-sm mb-2" for="password">
             Password
           </label>
           <input
@@ -58,11 +52,14 @@ function Login() {
             id="password"
             type="password"
             placeholder="••••••••"
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: "Please type your password.",
+              minLength: { message: "Password has a minimum length of 6.", value: 6 },
+            })}
           />
-          {errors.email && (
+          {errors.password && (
             <p className="text-red-500 text-xs italic mt-3">
-              Please choose a password.
+              {errors?.password?.message}
             </p>
           )}
         </div>
