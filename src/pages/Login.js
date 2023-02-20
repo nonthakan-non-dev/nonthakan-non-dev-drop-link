@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { registerWithEmailAndPassword } from "../firebase";
+import { logInWithEmailAndPassword } from "../firebase";
 
 function Login() {
   const {
@@ -10,10 +10,8 @@ function Login() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      await registerWithEmailAndPassword(data?.email, data?.password);
-    } catch (error) {
-      alert(error);
-    }
+      await logInWithEmailAndPassword(data?.email, data?.password);
+    } catch (error) {}
   };
 
   return (
@@ -99,14 +97,14 @@ function Login() {
             className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline rounded-md"
             type="submit"
           >
-            Sign In
+            Login
           </button>
         </div>
 
         <div className="flex items-center justify-center mt-8 text-sm ">
           <p className="mr-2">Don't have an account?</p>
           <a className="text-blue-500 hover:text-blue-800" href="/">
-            Sign up
+            Register
           </a>
         </div>
       </form>

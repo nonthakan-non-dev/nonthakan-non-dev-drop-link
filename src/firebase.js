@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
+import Swal from "sweetalert2";
 const firebaseConfig = {
   apiKey: "AIzaSyA4zXL_WlXqbrXsZoIzn6epj_SEfMX2oMk",
   authDomain: "nonthakan-non-dev-drop-link.firebaseapp.com",
@@ -28,8 +29,7 @@ const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    console.error(err);
-    alert(err.message);
+    Swal.fire("Login failed", "Incorrect email or password.", "error");
   }
 };
 const registerWithEmailAndPassword = async (email, password) => {
@@ -42,8 +42,7 @@ const registerWithEmailAndPassword = async (email, password) => {
       email,
     });
   } catch (err) {
-    console.error(err);
-    alert(err.message);
+    Swal.fire("Register failed", `${err.message}`, "question");
   }
 };
 const sendPasswordReset = async (email) => {
