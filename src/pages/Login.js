@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { getCurrentUser, registerWithEmailAndPassword } from "../firebase";
+import { registerWithEmailAndPassword } from "../firebase";
 
 function Login() {
   const {
@@ -16,9 +16,6 @@ function Login() {
     }
   };
 
-  useEffect(() => {
-    console.log(getCurrentUser());
-  }, []);
   return (
     <div className="min-h-screen w-full flex flex-col justify-center items-center">
       <form

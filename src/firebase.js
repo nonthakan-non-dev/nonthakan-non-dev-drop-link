@@ -7,7 +7,6 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 const firebaseConfig = {
@@ -59,22 +58,6 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
-const getCurrentUser = async () => {
-  try {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        return user;
-        // ...
-      } else {
-        return null;
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    alert(error.message);
-  }
-};
 export {
   auth,
   db,
@@ -83,5 +66,4 @@ export {
   sendPasswordReset,
   logout,
   analytics,
-  getCurrentUser,
 };
