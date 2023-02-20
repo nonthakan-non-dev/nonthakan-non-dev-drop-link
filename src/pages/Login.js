@@ -5,7 +5,6 @@ function Login() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
@@ -27,7 +26,7 @@ function Login() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm mb-2" for="email">
+          <label className="block text-gray-700 text-sm mb-2" htmlFor="email">
             Email
           </label>
           <input
@@ -44,7 +43,7 @@ function Login() {
           )}
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm mb-2" for="password">
+          <label className="block text-gray-700 text-sm mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -55,6 +54,7 @@ function Login() {
             {...register("password", {
               required: "Please type your password.",
               minLength: { message: "Password has a minimum length of 6.", value: 6 },
+              maxLength: { message: "Password has a maximum length of 20.", value: 20 },
             })}
           />
           {errors.password && (
