@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { getCurrentUser, registerWithEmailAndPassword } from "../firebase";
 
 function Login() {
   const {
@@ -7,7 +8,17 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await registerWithEmailAndPassword(data?.email, data?.password);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(getCurrentUser());
+  }, []);
   return (
     <div className="min-h-screen w-full flex flex-col justify-center items-center">
       <form
@@ -38,7 +49,7 @@ function Login() {
               required: "Please type your email.",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                message: "Invalid email address.",
               },
             })}
           />
