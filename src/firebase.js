@@ -28,10 +28,9 @@ const db = getDatabase(app);
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
+  } catch (error) {
     Swal.fire({
-      title: "Login failed",
-      text: "Incorrect email or password.",
+      text: `${error?.message ?? ""}`,
       icon: "error",
       confirmButtonColor: "#3B82F6",
     });
@@ -53,11 +52,20 @@ const registerWithEmailAndPassword = async (email, password) => {
 };
 const sendPasswordReset = async (email) => {
   try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
+    await sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:3000/",
+    });
+    Swal.fire({
+      html: `<p>A password reset link has been sent to <strong>${email}</strong> Please check your email.</p>`,
+      icon: "success",
+      confirmButtonColor: "#3B82F6",
+    });
+  } catch (error) {
+    Swal.fire({
+      text: `${error?.message ?? ""}`,
+      icon: "error",
+      confirmButtonColor: "#3B82F6",
+    });
   }
 };
 const logout = () => {

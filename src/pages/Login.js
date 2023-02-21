@@ -1,16 +1,29 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { logInWithEmailAndPassword } from "../firebase";
+import { logInWithEmailAndPassword, sendPasswordReset } from "../firebase";
 
 function Login() {
   const {
     register,
     handleSubmit,
+    watch,
+    setError,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
     try {
       await logInWithEmailAndPassword(data?.email, data?.password);
+    } catch (error) {}
+  };
+
+  const forgetPassword = () => {
+    try {
+      const email = watch("email");
+      if (!email || email.trim().length <= 0) {
+        setError("email", { type: "custom", message: "Please type your email." });
+      } else {
+        sendPasswordReset(email);
+      }
     } catch (error) {}
   };
 
@@ -85,12 +98,12 @@ function Login() {
           )}
         </div>
         <div className="flex items-center justify-end">
-          <a
-            className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800"
-            href="/"
+          <p
+            className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800 cursor-pointer"
+            onClick={forgetPassword}
           >
             Forgot Password?
-          </a>
+          </p>
         </div>
         <div className="w-full mt-5">
           <button
