@@ -13,12 +13,13 @@ import Swal from "sweetalert2";
 const firebaseConfig = {
   apiKey: "AIzaSyA4zXL_WlXqbrXsZoIzn6epj_SEfMX2oMk",
   authDomain: "nonthakan-non-dev-drop-link.firebaseapp.com",
-  databaseURL: "https://nonthakan-non-dev-drop-link-default-rtdb.asia-southeast1.firebasedatabase.app",
+  databaseURL:
+    "https://nonthakan-non-dev-drop-link-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "nonthakan-non-dev-drop-link",
   storageBucket: "nonthakan-non-dev-drop-link.appspot.com",
   messagingSenderId: "508287155468",
   appId: "1:508287155468:web:54d4cd99e6d4e383f55d29",
-  measurementId: "G-ES94NJVWE2"
+  measurementId: "G-ES94NJVWE2",
 };
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -52,7 +53,7 @@ const registerWithEmailAndPassword = async (email, password) => {
 const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email, {
-      url: "http://localhost:3000/",
+      url: `${firebaseConfig.authDomain}`,
     });
     Swal.fire({
       html: `<p>A password reset link has been sent to <strong>${email}</strong> Please check your email.</p>`,
