@@ -42,6 +42,7 @@ function App() {
         <LayoutAuth>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/register" element={<Home />}></Route>
             <Route exact path="/*" element={<Page404 />}></Route>
           </Routes>
         </LayoutAuth>
