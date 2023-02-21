@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { logInWithEmailAndPassword, sendPasswordReset } from "../firebase";
 
 function Login() {
+  const [active, setActive] = useState(true);
   const {
     register,
     handleSubmit,
@@ -12,19 +13,28 @@ function Login() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
+      if (!active) return;
+      setActive(false);
       await logInWithEmailAndPassword(data?.email, data?.password);
     } catch (error) {}
+    setActive(true);
   };
 
-  const forgetPassword = () => {
+  const forgetPassword = async () => {
     try {
+      if (!active) return;
+      setActive(false);
       const email = watch("email");
       if (!email || email.trim().length <= 0) {
-        setError("email", { type: "custom", message: "Please type your email." });
+        setError("email", {
+          type: "custom",
+          message: "Please type your email.",
+        });
       } else {
-        sendPasswordReset(email);
+        await sendPasswordReset(email);
       }
     } catch (error) {}
+    setActive(true);
   };
 
   return (
