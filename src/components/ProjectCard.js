@@ -7,8 +7,8 @@ import {
 
 const ProjectCard = ({ img, title, tool }) => {
   return (
-    <Card className="w-96">
-      <CardHeader floated={false} className="h-56">
+    <Card className="w-auto">
+      <CardHeader floated={false} className="h-[5%]">
         <img
           src={
             img ??
@@ -19,7 +19,7 @@ const ProjectCard = ({ img, title, tool }) => {
         />
       </CardHeader>
       <CardBody className="text-center">
-        <Typography variant="h4" color="blue-gray" className="mb-2">
+        <Typography variant="h5" color="blue-gray" className="mb-1">
           {title ?? "-"}
         </Typography>
         <Typography color="blue" className="font-medium" textGradient>
