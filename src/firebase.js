@@ -53,7 +53,7 @@ const registerWithEmailAndPassword = async (email, password) => {
 const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email, {
-      url: `${firebaseConfig.authDomain}`,
+      url: "https://nonthakan-non-dev-drop-link.web.app/",
     });
     Swal.fire({
       html: `<p>A password reset link has been sent to <strong>${email}</strong> Please check your email.</p>`,
