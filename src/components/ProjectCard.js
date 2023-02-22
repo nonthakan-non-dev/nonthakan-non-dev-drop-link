@@ -10,7 +10,7 @@ const ProjectCard = ({ data }) => {
   return (
     <a href={url} target="_blank" rel="noreferrer">
       <Card className="w-auto">
-        <CardHeader floated={false} className="h-[150px] flex justify-center">
+        <CardHeader floated={false} className="h-[200px] flex justify-center">
           <img
             src={
               img ??
