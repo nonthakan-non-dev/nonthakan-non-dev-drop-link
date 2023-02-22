@@ -34,13 +34,13 @@ const Nav = () => {
             className="object-cover h-full w-auto"
           />
         </div>
-        <h1 className="text-sm lg:text-lg ml-4 select-none hidden sm:inline">
+        <h1 className="text-sm lg:text-lg ml-4 select-none hidden md:inline">
           Drop Link
         </h1>
       </div>
 
-      <div>
-        <form className="w-full md:w-auto" onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-[200px] sm:w-[300px] lg:w-[360px] xl:w-[400px]">
+        <form className="w-full md:w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="">
             <input
               className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
