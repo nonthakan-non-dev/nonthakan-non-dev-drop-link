@@ -40,7 +40,7 @@ function Login() {
   return (
     <div className="min-h-screen w-full flex flex-col justify-center items-center">
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[95%] md:w-[60%] lg:w-[50%] xl:w-[35%]"
+        className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-[95%] md:w-[60%] lg:w-[50%] xl:w-[35%]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex items-center justify-center mb-8">
@@ -59,7 +59,7 @@ function Login() {
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="text"
             placeholder="name@gmail.com"
@@ -85,7 +85,7 @@ function Login() {
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             placeholder="••••••••"
@@ -117,7 +117,7 @@ function Login() {
         </div>
         <div className="w-full mt-5">
           <button
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline rounded-md"
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Login
