@@ -6,7 +6,7 @@ const Nav = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex flex-row justify-between bg-white">
+    <div className="w-full flex flex-row justify-between bg-white min-h-[50px]">
       <div
         className="flex items-center justify-center ml-3 cursor-pointer"
         onClick={() => navigate("/", { replace: true })}
