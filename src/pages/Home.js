@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import ProjectCard from "../components/ProjectCard";
 import ShortcutMenu from "../components/ShortcutMenu";
 
 function Home() {
+  const [createPopup, setCreatePopup] = useState(false);
+
+  useEffect(() => {
+    if (createPopup) {
+      alert(createPopup);
+    }
+  }, [createPopup]);
+
   const AllLinks = () => {
     return (
       <>
@@ -25,7 +33,7 @@ function Home() {
   return (
     <div className="min-h-screen	w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
       <AllLinks />
-      <ShortcutMenu />
+      <ShortcutMenu event={setCreatePopup} />
     </div>
   );
 }
