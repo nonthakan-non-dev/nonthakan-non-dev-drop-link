@@ -2,7 +2,7 @@ const ProjectCard = ({ data }) => {
   const { img, title, description, url } = data;
   return (
     <a href={url} target="_blank" rel="noreferrer">
-      <div class="max-w-sm rounded-[8px] overflow-hidden shadow-lg bg-white">
+      <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
         <img
           class="w-full"
           src={
