@@ -76,12 +76,12 @@ const saveLink = async (data) => {
     const { image, tags, text, title } = data;
     console.info({ image, tags, text, title });
 
-    Swal.fire({
-      title: "Saved!",
-      icon: "success",
-      confirmButtonText: "OK",
-      confirmButtonColor: "#3B82F6",
-    });
+    // Swal.fire({
+    //   title: "Saved!",
+    //   icon: "success",
+    //   confirmButtonText: "OK",
+    //   confirmButtonColor: "#3B82F6",
+    // });
   } catch (error) {
     Swal.fire({
       text: `${error?.message ?? ""}`,

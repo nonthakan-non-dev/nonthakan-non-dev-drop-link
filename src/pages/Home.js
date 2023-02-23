@@ -9,6 +9,12 @@ function Home() {
   const [createPopup, setCreatePopup] = useState(false);
 
   useEffect(() => {
+    saveLink({
+      image: "http://sweetalert2.github.io/images/sweetalert2-social.png",
+      tags: "html,css,js",
+      text: "A beautiful, responsive, customizable and accessib…AI-ARIA) replacement for JavaScript's popup boxes",
+      title: "SweetAlert2",
+    });
     if (createPopup) {
       Swal.fire({
         title: "Drop your link",
