@@ -19,9 +19,21 @@ function Home() {
       Swal.fire({
         title: "Drop your link",
         input: "text",
+        inputAutoTrim: true,
         inputPlaceholder: "https://www.link.com",
         inputAttributes: {
           autocapitalize: "off",
+        },
+        inputValidator: (value) => {
+          if (!value) {
+            return "You need to drop link!";
+          }
+          const httpRegex =
+            // eslint-disable-next-line
+            /^[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+          if (!httpRegex.test(value)) {
+            return "Invalid type URL!";
+          }
         },
         showCancelButton: true,
         confirmButtonText: "Next",
@@ -50,6 +62,7 @@ function Home() {
             }`,
             input: "text",
             inputPlaceholder: "Comma seperated tags e.g. work,dev",
+            inputAutoTrim: true,
             inputAttributes: {
               autocapitalize: "off",
             },
