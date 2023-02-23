@@ -10,13 +10,15 @@ function Home() {
   useEffect(() => {
     if (createPopup) {
       Swal.fire({
-        title: "Submit your Github username",
+        title: "Drop your link",
         input: "text",
+        inputPlaceholder: "https://www.link.com",
         inputAttributes: {
           autocapitalize: "off",
         },
         showCancelButton: true,
-        confirmButtonText: "Look up",
+        confirmButtonText: "Next",
+        confirmButtonColor: "#3B82F6",
         showLoaderOnConfirm: true,
         preConfirm: (url) => {
           return fetch(
