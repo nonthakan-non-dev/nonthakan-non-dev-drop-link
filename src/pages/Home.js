@@ -7,6 +7,17 @@ import Swal from "sweetalert2";
 function Home() {
   const [createPopup, setCreatePopup] = useState(false);
 
+  const saveLink = (data) => {
+    console.log(data);
+    Swal.fire({
+      title: "Saved!",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3B82F6",
+    });
+    return;
+  };
+
   useEffect(() => {
     if (createPopup) {
       Swal.fire({
@@ -21,9 +32,7 @@ function Home() {
         confirmButtonColor: "#3B82F6",
         showLoaderOnConfirm: true,
         preConfirm: (url) => {
-          return fetch(
-            `${process.env.REACT_APP_LINKPREVIEW_ENDPOINT}${url}`
-          )
+          return fetch(`${process.env.REACT_APP_LINKPREVIEW_ENDPOINT}${url}`)
             .then((response) => {
               if (!response.ok) {
                 throw new Error(response.statusText);
@@ -35,20 +44,31 @@ function Home() {
             });
         },
         allowOutsideClick: () => !Swal.isLoading(),
-      }).then((result) => {
-        if (result.isConfirmed) {
+      }).then((resultLink) => {
+        if (resultLink.isConfirmed) {
           Swal.fire({
-            title: `${result?.value?.title ?? "-"}`,
-            text: `${result?.value?.description ?? "-"}`,
+            title: `${resultLink?.value?.title ?? "-"}`,
+            text: `${resultLink?.value?.description ?? "-"}`,
             imageUrl: `${
-              result?.value?.image ??
-              process.env.REACT_APP_NO_IMAGE
+              resultLink?.value?.image ?? process.env.REACT_APP_NO_IMAGE
             }`,
+            input: "text",
+            inputPlaceholder: "Comma seperated tags e.g. work,dev",
+            inputAttributes: {
+              autocapitalize: "off",
+            },
             showCancelButton: true,
             confirmButtonText: "Save",
+            confirmButtonColor: "#3B82F6",
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire("Saved!", "", "success");
+              const data = {
+                title: resultLink?.value?.title,
+                text: resultLink?.value?.description,
+                imageUrl: resultLink?.value?.image,
+                tags: result?.value,
+              };
+              saveLink(data);
             }
           });
         }
