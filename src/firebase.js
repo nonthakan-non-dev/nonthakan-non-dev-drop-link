@@ -70,6 +70,26 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+const saveLink = async (data) => {
+  try {
+    const { image, tags, text, title } = data;
+    console.info({ image, tags, text, title });
+
+    Swal.fire({
+      title: "Saved!",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3B82F6",
+    });
+  } catch (error) {
+    Swal.fire({
+      text: `${error?.message ?? ""}`,
+      icon: "error",
+      confirmButtonColor: "#3B82F6",
+    });
+  }
+};
 export {
   auth,
   db,
@@ -78,4 +98,5 @@ export {
   sendPasswordReset,
   logout,
   analytics,
+  saveLink,
 };

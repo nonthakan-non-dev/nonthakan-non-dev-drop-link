@@ -3,20 +3,10 @@ import _ from "lodash";
 import ProjectCard from "../components/ProjectCard";
 import ShortcutMenu from "../components/ShortcutMenu";
 import Swal from "sweetalert2";
+import { saveLink } from "../firebase";
 
 function Home() {
   const [createPopup, setCreatePopup] = useState(false);
-
-  const saveLink = (data) => {
-    console.log(data);
-    Swal.fire({
-      title: "Saved!",
-      icon: "success",
-      confirmButtonText: "OK",
-      confirmButtonColor: "#3B82F6",
-    });
-    return;
-  };
 
   useEffect(() => {
     if (createPopup) {
@@ -65,7 +55,7 @@ function Home() {
               const data = {
                 title: resultLink?.value?.title,
                 text: resultLink?.value?.description,
-                imageUrl: resultLink?.value?.image,
+                image: resultLink?.value?.image,
                 tags: result?.value,
               };
               saveLink(data);
