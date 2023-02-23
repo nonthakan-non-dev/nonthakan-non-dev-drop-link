@@ -11,15 +11,14 @@ import {
 import { getDatabase, ref, set } from "firebase/database";
 import Swal from "sweetalert2";
 const firebaseConfig = {
-  apiKey: "AIzaSyA4zXL_WlXqbrXsZoIzn6epj_SEfMX2oMk",
-  authDomain: "nonthakan-non-dev-drop-link.firebaseapp.com",
-  databaseURL:
-    "https://nonthakan-non-dev-drop-link-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "nonthakan-non-dev-drop-link",
-  storageBucket: "nonthakan-non-dev-drop-link.appspot.com",
-  messagingSenderId: "508287155468",
-  appId: "1:508287155468:web:54d4cd99e6d4e383f55d29",
-  measurementId: "G-ES94NJVWE2",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -53,7 +52,7 @@ const registerWithEmailAndPassword = async (email, password) => {
 const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email, {
-      url: "https://nonthakan-non-dev-drop-link.web.app/",
+      url: process.env.REACT_APP_HOST,
     });
     Swal.fire({
       html: `<p>A password reset link has been sent to <strong>${email}</strong> Please check your email.</p>`,

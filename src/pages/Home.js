@@ -20,7 +20,7 @@ function Home() {
         showLoaderOnConfirm: true,
         preConfirm: (url) => {
           return fetch(
-            `https://api.linkpreview.net/?key=79db54a9aa1d3b2b7c6479c589a610c3&q=${url}`
+            `${process.env.REACT_APP_LINKPREVIEW_ENDPOINT}${url}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -40,8 +40,14 @@ function Home() {
             text: `${result?.value?.description ?? "-"}`,
             imageUrl: `${
               result?.value?.image ??
-              "https://firebasestorage.googleapis.com/v0/b/nonthakan-non-dev.appspot.com/o/asset%2Fcommon%2Fno-image.png?alt=media&token=97f025fe-10d5-4a52-8430-1b3ff38ef06c"
+              process.env.REACT_APP_NO_IMAGE
             }`,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire("Saved!", "", "success");
+            }
           });
         }
       });

@@ -7,7 +7,7 @@ const ProjectCard = ({ data }) => {
           class="w-full"
           src={
             img ??
-            "https://firebasestorage.googleapis.com/v0/b/nonthakan-non-dev.appspot.com/o/asset%2Fcommon%2Fno-image.png?alt=media&token=97f025fe-10d5-4a52-8430-1b3ff38ef06c"
+            process.env.REACT_APP_NO_IMAGE
           }
           alt="Sunset in the mountains"
         />
