@@ -18,8 +18,10 @@ function Home() {
         showCancelButton: true,
         confirmButtonText: "Look up",
         showLoaderOnConfirm: true,
-        preConfirm: (login) => {
-          return fetch(`//api.github.com/users/${login}`)
+        preConfirm: (url) => {
+          return fetch(
+            `https://api.linkpreview.net/?key=79db54a9aa1d3b2b7c6479c589a610c3&q=${url}`
+          )
             .then((response) => {
               if (!response.ok) {
                 throw new Error(response.statusText);
@@ -34,8 +36,12 @@ function Home() {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
-            title: `${result.value.login}'s avatar`,
-            imageUrl: result.value.avatar_url,
+            title: `${result?.value?.title ?? "-"}`,
+            text: `${result?.value?.description ?? "-"}`,
+            imageUrl: `${
+              result?.value?.image ??
+              "https://firebasestorage.googleapis.com/v0/b/nonthakan-non-dev.appspot.com/o/asset%2Fcommon%2Fno-image.png?alt=media&token=97f025fe-10d5-4a52-8430-1b3ff38ef06c"
+            }`,
           });
         }
       });
