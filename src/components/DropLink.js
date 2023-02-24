@@ -18,22 +18,22 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
 
   const style = {
     position: "absolute",
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   };
   return (
-    <div>
+    <div className="bg-none flex justify-center items-center">
       <Modal
         open={modalIsOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={style}>
+        <div style={style} className="focus:outline-none focus:shadow-outline">
           <form
             className="bg-white border-0 rounded-lg px-8 pt-6 pb-8 mb-4 w-full h-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -52,58 +52,49 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
             </div>
 
             <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm mb-2"
-                htmlFor="email"
-              >
-                Email
+              <label className="block text-gray-700 text-sm mb-2" htmlFor="url">
+                Url
               </label>
               <input
                 className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
+                id="url"
                 type="text"
-                placeholder="name@gmail.com"
-                {...register("email", {
+                placeholder="https://www.link.com"
+                {...register("url", {
                   required: "Please type your email.",
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address.",
+                    value:
+                      // eslint-disable-next-line
+                      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm,
+                    message: "Invalid type url!",
                   },
                 })}
               />
-              {errors.email && (
+              {errors.url && (
                 <p className="text-red-500 text-xs italic mt-3">
-                  {errors?.email?.message}
+                  {errors?.url?.message}
                 </p>
               )}
             </div>
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm mb-2"
-                htmlFor="password"
+                htmlFor="tags"
               >
-                Password
+                Tags
               </label>
+              <div>
               <input
                 className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                {...register("password", {
-                  required: "Please type your password.",
-                  minLength: {
-                    message: "Password has a minimum length of 6.",
-                    value: 6,
-                  },
-                  maxLength: {
-                    message: "Password has a maximum length of 20.",
-                    value: 20,
-                  },
-                })}
+                id="tags"
+                type="text"
+                placeholder="e.g. work,dev"
+                {...register("tags")}
               />
-              {errors.password && (
+              </div>
+              {errors.tags && (
                 <p className="text-red-500 text-xs italic mt-3">
-                  {errors?.password?.message}
+                  {errors?.tags?.message}
                 </p>
               )}
             </div>
@@ -112,15 +103,8 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
                 className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Register
+                Save
               </button>
-            </div>
-
-            <div className="flex items-center justify-center mt-8 text-sm ">
-              <p className="mr-2">Already have an account?</p>
-              <a className="text-blue-500 hover:text-blue-800" href="/">
-                Login
-              </a>
             </div>
           </form>
         </div>
