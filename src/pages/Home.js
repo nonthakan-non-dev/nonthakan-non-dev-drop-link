@@ -1,23 +1,42 @@
-import React, { useState } from "react";
-import _ from "lodash";
+import React, { useEffect, useState } from "react";
+// import _ from "lodash";
 import ProjectCard from "../components/ProjectCard";
 import ShortcutMenu from "../components/ShortcutMenu";
 import DropLink from "../components/DropLink";
+import { getDropLinkData } from "../firebase";
 
 function Home() {
   const [createPopup, setCreatePopup] = useState(false);
+  // const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
+  const [dropLinkDataRawShow, setDropLinkDataRawShow] = useState([]);
+
+  const fetchGetDropLinkData = async () => {
+    try {
+      const dataRaw = await getDropLinkData();
+      // setDropLinkDataRaw(dataRaw);
+      setDropLinkDataRawShow(dataRaw);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGetDropLinkData();
+  }, []);
 
   const AllLinks = () => {
     return (
       <>
-        {_.times(10).map((i) => (
+        {dropLinkDataRawShow.map((v, i) => (
           <div key={i}>
             <ProjectCard
               data={{
-                img: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png",
-                title: "Google",
-                description: `Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.`,
-                url: "https://www.google.com",
+                img: v?.image,
+                title: v?.title,
+                description: v?.description,
+                url: v?.url,
+                tags: ["#html", "#css", "js"],
+                // tags: v?.tags,
               }}
             />
           </div>

@@ -9,7 +9,14 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
   const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
   const [tagsAll, setTagsAll] = useState([]);
   const [tagsShow, setTagsShow] = useState([]);
-  const handleClose = () => setIsOpen(false);
+  const clearForm = () => {
+    setValue("url", "");
+    setValue("tags", "");
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+    clearForm();
+  };
   const {
     register,
     handleSubmit,
@@ -39,8 +46,7 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
         tags: data?.tags,
       });
     }
-    setValue("url", "");
-    setValue("tags", "");
+    clearForm();
   };
   const searchTags = (tag) => {
     try {
@@ -49,7 +55,6 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
         return i.toLowerCase().includes(tag.toLowerCase());
       });
       setTagsShow(tem);
-      console.log(tag);
     } catch (error) {}
   };
 

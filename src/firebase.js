@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { child, get, getDatabase, ref, set } from "firebase/database";
 import Swal from "sweetalert2";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -105,6 +105,28 @@ const saveLink = async (data) => {
     });
   }
 };
+const getDropLinkData = async () => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const userId = user.uid;
+    const dbRef = ref(getDatabase());
+    const data = await get(child(dbRef, `dropLink/${userId}/`))
+      .then((snapshot) => {
+        let data = {};
+        if (snapshot.exists()) {
+          data = snapshot.val();
+        }
+        return data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    return Object.values(data).flat();
+  } catch (error) {
+    throw error;
+  }
+};
 export {
   auth,
   db,
@@ -114,4 +136,5 @@ export {
   logout,
   analytics,
   saveLink,
+  getDropLinkData,
 };
