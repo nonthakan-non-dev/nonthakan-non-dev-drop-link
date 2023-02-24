@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { saveLink } from "../firebase";
 
 const DropLink = ({ modalIsOpen, setIsOpen }) => {
   const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
@@ -14,7 +15,6 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
     handleSubmit,
     watch,
     setValue,
-    setError,
     formState: { errors },
   } = useForm();
 
@@ -25,11 +25,22 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
   };
   const onSubmit = async (data) => {
     try {
-      const dataLinkPreview = await getLinkPreview(data?.url);
-      console.log(data, dataLinkPreview?.data);
+      handleClose();
+      const dataLinkPreviewRaw = await getLinkPreview(data?.url);
+      const { url, ...dataLinkPreview } = dataLinkPreviewRaw?.data;
+      await saveLink({
+        url: data?.url,
+        tags: data?.tags,
+        ...dataLinkPreview,
+      });
     } catch (error) {
-      setError("url", { type: "custom", message: `${error.message}` });
+      await saveLink({
+        url: data?.url,
+        tags: data?.tags,
+      });
     }
+    setValue("url", "");
+    setValue("tags", "");
   };
   const searchTags = (tag) => {
     try {

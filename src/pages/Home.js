@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import _ from "lodash";
 import ProjectCard from "../components/ProjectCard";
 import ShortcutMenu from "../components/ShortcutMenu";
-// import Swal from "sweetalert2";
-// import { saveLink } from "../firebase";
 import DropLink from "../components/DropLink";
 
 function Home() {
   const [createPopup, setCreatePopup] = useState(false);
+
   const AllLinks = () => {
     return (
       <>

@@ -73,15 +73,30 @@ const logout = () => {
 
 const saveLink = async (data) => {
   try {
-    const { image, tags, text, title } = data;
-    console.info({ image, tags, text, title });
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const userId = user.uid;
+    const timestamp = new Date().getTime();
+    if (!user) {
+      Swal.fire({
+        text: "Access Denied/Forbidden 403",
+        icon: "error",
+        confirmButtonColor: "#3B82F6",
+      });
+      return;
+    }
 
-    // Swal.fire({
-    //   title: "Saved!",
-    //   icon: "success",
-    //   confirmButtonText: "OK",
-    //   confirmButtonColor: "#3B82F6",
-    // });
+    await set(ref(db, `dropLink/${userId}/${timestamp}`), {
+      ...data,
+      createdAt: timestamp,
+    });
+
+    Swal.fire({
+      title: "Saved!",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3B82F6",
+    });
   } catch (error) {
     Swal.fire({
       text: `${error?.message ?? ""}`,
