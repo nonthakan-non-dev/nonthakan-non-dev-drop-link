@@ -1,37 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
 const DropLink = ({ modalIsOpen, setIsOpen }) => {
-  const [tagsAll, setTagsAll] = useState(["Saab", "Volvo", "BMW"]);
+  const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
+  const [tagsAll, setTagsAll] = useState([]);
   const [tagsShow, setTagsShow] = useState([]);
   const handleClose = () => setIsOpen(false);
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
-  const handleKeyUp = (event) => {
-    try {
-      const tagsCursorPosition = event.target.selectionStart;
-      const tags = watch("tags");
-      console.log(tags, tagsCursorPosition);
-    } catch (error) {}
-  };
   const onSubmit = async (data) => {
     try {
       console.log(data);
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
   };
   const searchTags = (tag) => {
     try {
-      if (!tag) {
-        setTagsShow([]);
-        return;
-      }
+      if (!tag) return;
       const tem = _.filter(tagsAll, function (i) {
         return i.toLowerCase().includes(tag.toLowerCase());
       });
@@ -39,6 +31,55 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
       console.log(tag);
     } catch (error) {}
   };
+
+  const splitTags = (str, startIndex, endIndex) => {
+    const before = str.substring(0, startIndex);
+    const substring = str.substring(startIndex, endIndex);
+    const after = str.substring(endIndex);
+    const result = { before, substring, after };
+    return result;
+  };
+
+  const selectTags = (tag) => {
+    try {
+      setTagsShow([]);
+      const tagsRaw = watch("tags");
+      const { before, after } = splitTags(
+        tagsRaw,
+        tagsCursor.start,
+        tagsCursor.end
+      );
+      const tagsNew = before.concat([tag]).concat(after);
+      setValue("tags", tagsNew);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    try {
+      setTagsShow([]);
+      const end = event.target.selectionStart;
+      const tagsRaw = watch("tags");
+      if (!tagsRaw) return;
+      let pass = false;
+      if (typeof tagsRaw[end] === "undefined" || tagsRaw[end] === " ") {
+        pass = true;
+      }
+      if (!pass) return;
+      const tags = tagsRaw.slice(0, end);
+      const start = tags.lastIndexOf("#");
+      if (start < 0) return;
+      const tag = tagsRaw.slice(start, end);
+      if (tag.length <= 1) return;
+      setTagsCursor({ start, end });
+      searchTags(tag);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => setTagsAll(["#Saab", "#Volvo", "#BMW"]), []);
 
   const style = {
     position: "absolute",
@@ -113,14 +154,22 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
                   id="tags"
                   type="text"
                   placeholder="e.g. #work #dev"
+                  autoComplete="off"
                   onKeyUp={handleKeyUp}
+                  onClick={handleKeyUp}
                   {...register("tags")}
                 />
                 {tagsShow?.length > 0 && (
                   <div className="absolute min-h-fit max-h-[80px] overflow-y-auto bottom-[80px ] left-0 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
                     {tagsShow?.map((v, i) => (
-                      <div key={i}>
-                        <p className="mb-1">{v}</p>
+                      <div
+                        className="mb-1"
+                        key={i}
+                        onClick={() => {
+                          selectTags(v);
+                        }}
+                      >
+                        <span className=" text-sm">{v}</span>
                       </div>
                     ))}
                   </div>
