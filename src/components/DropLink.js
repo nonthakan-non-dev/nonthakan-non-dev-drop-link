@@ -112,7 +112,16 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={style} className="focus:outline-none focus:shadow-outline">
+        <div
+          style={style}
+          className="focus:outline-none focus:shadow-outline relative"
+        >
+          <div
+            className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer"
+            onClick={handleClose}
+          >
+            <box-icon name="x-circle" size="md"></box-icon>
+          </div>
           <form
             className="bg-white border-0 rounded-lg px-8 pt-6 pb-8 mb-4 w-full h-full"
             onSubmit={handleSubmit(onSubmit)}
