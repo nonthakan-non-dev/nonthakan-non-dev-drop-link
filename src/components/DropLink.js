@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
+import _ from "lodash";
 import { useForm } from "react-hook-form";
 const DropLink = ({ modalIsOpen, setIsOpen }) => {
+  const [tagsAll, setTagsAll] = useState(["Saab", "Volvo", "BMW"]);
+  const [tagsShow, setTagsShow] = useState([]);
   const handleClose = () => setIsOpen(false);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+  const handleKeyUp = (event) => {
+    try {
+      const tagsCursorPosition = event.target.selectionStart;
+      const tags = watch("tags");
+      console.log(tags, tagsCursorPosition);
+    } catch (error) {}
+  };
   const onSubmit = async (data) => {
     try {
       console.log(data);
     } catch (error) {
       alert(error);
     }
+  };
+  const searchTags = (tag) => {
+    try {
+      if (!tag) {
+        setTagsShow([]);
+        return;
+      }
+      const tem = _.filter(tagsAll, function (i) {
+        return i.toLowerCase().includes(tag.toLowerCase());
+      });
+      setTagsShow(tem);
+      console.log(tag);
+    } catch (error) {}
   };
 
   const style = {
@@ -83,14 +107,24 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
               >
                 Tags
               </label>
-              <div>
-              <input
-                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="tags"
-                type="text"
-                placeholder="e.g. #work #dev"
-                {...register("tags")}
-              />
+              <div className="relative">
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="tags"
+                  type="text"
+                  placeholder="e.g. #work #dev"
+                  onKeyUp={handleKeyUp}
+                  {...register("tags")}
+                />
+                {tagsShow?.length > 0 && (
+                  <div className="absolute min-h-fit max-h-[80px] overflow-y-auto bottom-[80px ] left-0 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
+                    {tagsShow?.map((v, i) => (
+                      <div key={i}>
+                        <p className="mb-1">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               {errors.tags && (
                 <p className="text-red-500 text-xs italic mt-3">
