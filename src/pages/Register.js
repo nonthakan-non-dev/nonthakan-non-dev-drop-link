@@ -85,8 +85,8 @@ function Register() {
                 value: 6,
               },
               maxLength: {
-                message: "Password has a maximum length of 20.",
-                value: 20,
+                message: "Password has a maximum length of 200.",
+                value: 200,
               },
             })}
           />
