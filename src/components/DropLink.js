@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
 const DropLink = ({ modalIsOpen, setIsOpen }) => {
   const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
   const [tagsAll, setTagsAll] = useState([]);
@@ -12,13 +14,21 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
     handleSubmit,
     watch,
     setValue,
+    setError,
     formState: { errors },
   } = useForm();
+
+  const getLinkPreview = async (url) => {
+    try {
+      return axios.get(`${process.env.REACT_APP_LINKPREVIEW_ENDPOINT}${url}`);
+    } catch (error) {}
+  };
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      const dataLinkPreview = await getLinkPreview(data?.url);
+      console.log(data, dataLinkPreview?.data);
     } catch (error) {
-      console.error(error);
+      setError("url", { type: "custom", message: `${error.message}` });
     }
   };
   const searchTags = (tag) => {
