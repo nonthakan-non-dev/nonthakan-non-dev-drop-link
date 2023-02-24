@@ -73,7 +73,11 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
       const tagsRaw = watch("tags");
       if (!tagsRaw) return;
       let pass = false;
-      if (typeof tagsRaw[end] === "undefined" || tagsRaw[end] === " ") {
+      if (
+        typeof tagsRaw[end] === "undefined" ||
+        tagsRaw[end] === " " ||
+        tagsRaw[end] === "#"
+      ) {
         pass = true;
       }
       if (!pass) return;
