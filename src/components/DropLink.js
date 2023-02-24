@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { saveLink } from "../firebase";
 
-const DropLink = ({ modalIsOpen, setIsOpen }) => {
+const DropLink = ({ modalIsOpen, setIsOpen, setFetch }) => {
   const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
   const [tagsAll, setTagsAll] = useState([]);
   const [tagsShow, setTagsShow] = useState([]);
@@ -46,6 +46,7 @@ const DropLink = ({ modalIsOpen, setIsOpen }) => {
         tags: data?.tags,
       });
     }
+    setFetch((i) => !i);
     clearForm();
   };
   const searchTags = (tag) => {

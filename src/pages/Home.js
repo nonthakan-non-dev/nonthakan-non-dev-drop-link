@@ -6,6 +6,7 @@ import DropLink from "../components/DropLink";
 import { getDropLinkData } from "../firebase";
 
 function Home() {
+  const [fetch, setFetch] = useState(false);
   const [createPopup, setCreatePopup] = useState(false);
   // const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
   const [dropLinkDataRawShow, setDropLinkDataRawShow] = useState([]);
@@ -22,7 +23,7 @@ function Home() {
 
   useEffect(() => {
     fetchGetDropLinkData();
-  }, []);
+  }, [fetch]);
 
   const AllLinks = () => {
     return (
@@ -47,7 +48,7 @@ function Home() {
   return (
     <div className="min-h-screen	w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
       <AllLinks />
-      <DropLink modalIsOpen={createPopup} setIsOpen={setCreatePopup} />
+      <DropLink modalIsOpen={createPopup} setIsOpen={setCreatePopup} setFetch={setFetch} />
       <ShortcutMenu event={setCreatePopup} />
     </div>
   );
