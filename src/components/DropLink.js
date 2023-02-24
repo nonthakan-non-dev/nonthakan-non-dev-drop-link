@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { saveLink } from "../firebase";
 
-const DropLink = ({ modalIsOpen, setIsOpen, setFetch }) => {
+const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
   const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
-  const [tagsAll, setTagsAll] = useState([]);
+  const [
+    tagsAll, 
+    // eslint-disable-next-line
+    setTagsAll,
+  ] = useState(tagsAlls);
   const [tagsShow, setTagsShow] = useState([]);
   const clearForm = () => {
     setValue("url", "");
@@ -110,8 +114,6 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch }) => {
     }
   };
 
-  useEffect(() => setTagsAll(["#Saab", "#Volvo", "#BMW"]), []);
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -203,7 +205,7 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch }) => {
                   <div className="absolute min-h-fit max-h-[80px] overflow-y-auto bottom-[80px ] left-0 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
                     {tagsShow?.map((v, i) => (
                       <div
-                        className="mb-1"
+                        className="mb-1 cursor-pointer"
                         key={i}
                         onClick={() => {
                           selectTags(v);
