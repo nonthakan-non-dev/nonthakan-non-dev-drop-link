@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MenusManage from "./MenusManage";
 
-const ProjectCard = ({ data }) => {
+const ProjectCard = ({ data, setFetch }) => {
   const { img, title, description, url, tags } = data;
   const [imageSrc, setImageSrc] = useState(img);
 
@@ -11,7 +11,7 @@ const ProjectCard = ({ data }) => {
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white relative">
       <div className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer">
-        <MenusManage data={data} />
+        <MenusManage data={data} setFetch={setFetch} />
       </div>
       <a href={url} target="_blank" rel="noreferrer">
         <img

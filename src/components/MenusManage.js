@@ -5,10 +5,20 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
+import { deleteLink } from "../firebase";
 
-const MenusManage = ({ data }) => {
+const MenusManage = ({ data, setFetch }) => {
   // eslint-disable-next-line
   const { img, title, description, url, tags, id } = data;
+
+  const deleteDropLink = async (id) => {
+    try {
+      await deleteLink(id);
+      setFetch((i) => !i);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -32,7 +42,7 @@ const MenusManage = ({ data }) => {
           </MenuItem>
           <MenuItem
             className="w-full flex items-center"
-            onClick={() => console.log("Delete", id)}
+            onClick={() => deleteDropLink(id)}
           >
             <box-icon name="trash" color="#CC3333"></box-icon>
             <span className="ml-3 text-red-500">Delete</span>

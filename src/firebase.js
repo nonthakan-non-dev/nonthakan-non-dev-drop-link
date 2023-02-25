@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
-import { child, get, getDatabase, ref, set } from "firebase/database";
+import { child, get, getDatabase, ref, remove, set } from "firebase/database";
 import Swal from "sweetalert2";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -127,6 +127,36 @@ const getDropLinkData = async () => {
     throw error;
   }
 };
+const deleteLink = async (id) => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const userId = user.uid;
+    if (!user) {
+      Swal.fire({
+        text: "Access Denied/Forbidden 403",
+        icon: "error",
+        confirmButtonColor: "#3B82F6",
+      });
+      return;
+    }
+
+    await remove(ref(db, `dropLink/${userId}/${id}`));
+
+    Swal.fire({
+      title: "Deleted!",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3B82F6",
+    });
+  } catch (error) {
+    Swal.fire({
+      text: `${error?.message ?? ""}`,
+      icon: "error",
+      confirmButtonColor: "#3B82F6",
+    });
+  }
+};
 export {
   auth,
   db,
@@ -137,4 +167,5 @@ export {
   analytics,
   saveLink,
   getDropLinkData,
+  deleteLink
 };

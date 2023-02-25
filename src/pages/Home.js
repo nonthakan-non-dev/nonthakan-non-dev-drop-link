@@ -82,6 +82,7 @@ function Home() {
                 tags: v?.tags,
                 id: v?.createdAt
               }}
+              setFetch={setFetch}
             />
           </div>
         ))}
