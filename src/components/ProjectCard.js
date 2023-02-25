@@ -8,8 +8,8 @@ const ProjectCard = ({ data }) => {
     setImageSrc(process.env.REACT_APP_NO_IMAGE);
   };
   return (
-    <a href={url} target="_blank" rel="noreferrer">
-      <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
+    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
+      <a href={url} target="_blank" rel="noreferrer">
         <img
           className="w-full"
           src={imageSrc ?? process.env.REACT_APP_NO_IMAGE}
@@ -24,20 +24,20 @@ const ProjectCard = ({ data }) => {
             {description ?? "-"}
           </p>
         </div>
-        {tags?.length > 0 && (
-          <div className="px-6 pt-4 pb-2">
-            {tags.map((v, i) => (
-              <span
-                key={i}
-                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >
-                {v ?? "-"}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    </a>
+      </a>
+      {tags?.length > 0 && (
+        <div className="px-6 pt-4 pb-2">
+          {tags.map((v, i) => (
+            <span
+              key={i}
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            >
+              {v ?? "-"}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
