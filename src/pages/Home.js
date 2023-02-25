@@ -34,7 +34,7 @@ function Home() {
         dataAll.push({ tags: arrayTags, ...data });
       }
       setTagsAll(_.uniq(tagsRaws));
-      setDropLinkDataRaw(dataAll);
+      setDropLinkDataRaw(dataAll.reverse());
     } catch (error) {
       console.error(error);
     }
