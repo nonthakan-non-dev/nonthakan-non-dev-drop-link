@@ -4,11 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 import Menus from "./Menu";
 
-const Nav = () => {
+const Nav = ({ setSearchLink }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
+  const handleUpdateSearch = (keyword) => {
+    setSearchLink(keyword.trim());
+  };
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -16,7 +20,17 @@ const Nav = () => {
     try {
       if (!active) return;
       setActive(false);
-      console.log(data);
+      const keyword = data?.keyword ?? "";
+      handleUpdateSearch(keyword);
+    } catch (error) {}
+    setActive(true);
+  };
+  const onChangeKeyword = () => {
+    try {
+      if (!active) return;
+      setActive(false);
+      const keyword = watch("keyword") ?? "";
+      handleUpdateSearch(keyword);
     } catch (error) {}
     setActive(true);
   };
@@ -46,7 +60,9 @@ const Nav = () => {
               className="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Search link"
-              {...register("keyword")}
+              {...register("keyword", {
+                onChange: onChangeKeyword,
+              })}
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic mt-3">

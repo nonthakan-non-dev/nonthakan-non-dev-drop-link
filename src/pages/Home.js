@@ -13,6 +13,8 @@ function Home() {
   // const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
   const [dropLinkDataRawShow, setDropLinkDataRawShow] = useState([]);
 
+  const [searchLink, setSearchLink] = useState("");
+
   const fetchGetDropLinkData = async () => {
     try {
       const tagsRaws = [];
@@ -47,6 +49,10 @@ function Home() {
     fetchGetDropLinkData();
   }, [fetch]);
 
+  useEffect(() => {
+    console.log(12,searchLink)
+  }, [searchLink])
+
   const AllLinks = () => {
     return (
       <>
@@ -69,7 +75,7 @@ function Home() {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 z-50 border-b-2 border-silver">
-        <Nav />
+        <Nav setSearchLink={setSearchLink} />
       </div>
       <div className="min-h-screen	w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
         <AllLinks />
