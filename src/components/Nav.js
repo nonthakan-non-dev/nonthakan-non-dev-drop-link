@@ -60,6 +60,7 @@ const Nav = ({ setSearchLink }) => {
               className="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Search link"
+              autoComplete="off"
               {...register("keyword", {
                 onChange: onChangeKeyword,
               })}

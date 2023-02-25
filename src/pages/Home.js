@@ -10,7 +10,7 @@ function Home() {
   const [fetch, setFetch] = useState(false);
   const [tagsAll, setTagsAll] = useState([]);
   const [createPopup, setCreatePopup] = useState(false);
-  // const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
+  const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
   const [dropLinkDataRawShow, setDropLinkDataRawShow] = useState([]);
 
   const [searchLink, setSearchLink] = useState("");
@@ -34,24 +34,41 @@ function Home() {
         dataAll.push({ tags: arrayTags, ...data });
       }
       setTagsAll(_.uniq(tagsRaws));
-      // setDropLinkDataRaw(dataAll);
-      setDropLinkDataRawShow(dataAll);
+      setDropLinkDataRaw(dataAll);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // const fetchGetDropLinkDataShow = () => {
-  //   setDropLinkDataRawShow(dropLinkDataRaw);
-  // }
+  const fetchGetDropLinkDataShow = () => {
+    try {
+      setDropLinkDataRawShow([]);
+      if (searchLink?.length > 0) {
+        const filterDropLinkDataRaw = _.filter(dropLinkDataRaw, function (v) {
+          return (
+            v?.title?.toLowerCase().includes(searchLink?.toLowerCase()) ||
+            v?.tags
+              ?.join(" ")
+              ?.toLowerCase()
+              .includes(searchLink?.toLowerCase())
+          );
+        });
+        setDropLinkDataRawShow(filterDropLinkDataRaw);
+      } else {
+        setDropLinkDataRawShow(dropLinkDataRaw);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchGetDropLinkData();
   }, [fetch]);
 
   useEffect(() => {
-    console.log(12,searchLink)
-  }, [searchLink])
+    fetchGetDropLinkDataShow();
+  }, [searchLink, dropLinkDataRaw]);
 
   const AllLinks = () => {
     return (
