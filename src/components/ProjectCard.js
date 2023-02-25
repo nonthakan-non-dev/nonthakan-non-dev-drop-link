@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MenusManage from "./MenusManage";
 
 const ProjectCard = ({ data }) => {
   const { img, title, description, url, tags } = data;
@@ -8,7 +9,10 @@ const ProjectCard = ({ data }) => {
     setImageSrc(process.env.REACT_APP_NO_IMAGE);
   };
   return (
-    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
+    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white relative">
+      <div className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer">
+        <MenusManage />
+      </div>
       <a href={url} target="_blank" rel="noreferrer">
         <img
           className="w-full"
