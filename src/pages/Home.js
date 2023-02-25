@@ -40,33 +40,31 @@ function Home() {
     }
   };
 
-  const fetchGetDropLinkDataShow = () => {
-    try {
-      setDropLinkDataRawShow([]);
-      if (searchLink?.length > 0) {
-        const filterDropLinkDataRaw = _.filter(dropLinkDataRaw, function (v) {
-          return (
-            v?.title?.toLowerCase().includes(searchLink?.toLowerCase()) ||
-            v?.tags
-              ?.join(" ")
-              ?.toLowerCase()
-              .includes(searchLink?.toLowerCase())
-          );
-        });
-        setDropLinkDataRawShow(filterDropLinkDataRaw);
-      } else {
-        setDropLinkDataRawShow(dropLinkDataRaw);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     fetchGetDropLinkData();
   }, [fetch]);
 
   useEffect(() => {
+    const fetchGetDropLinkDataShow = () => {
+      try {
+        if (searchLink?.length > 0) {
+          const filterDropLinkDataRaw = _.filter(dropLinkDataRaw, function (v) {
+            return (
+              v?.title?.toLowerCase().includes(searchLink?.toLowerCase()) ||
+              v?.tags
+                ?.join(" ")
+                ?.toLowerCase()
+                .includes(searchLink?.toLowerCase())
+            );
+          });
+          setDropLinkDataRawShow(filterDropLinkDataRaw);
+        } else {
+          setDropLinkDataRawShow(dropLinkDataRaw);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchGetDropLinkDataShow();
   }, [searchLink, dropLinkDataRaw]);
 
