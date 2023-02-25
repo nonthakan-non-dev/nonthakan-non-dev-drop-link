@@ -11,7 +11,7 @@ const ProjectCard = ({ data }) => {
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white relative">
       <div className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer">
-        <MenusManage />
+        <MenusManage data={data} />
       </div>
       <a href={url} target="_blank" rel="noreferrer">
         <img

@@ -6,7 +6,10 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-const MenusManage = () => {
+const MenusManage = ({ data }) => {
+  // eslint-disable-next-line
+  const { img, title, description, url, tags, id } = data;
+
   return (
     <>
       <Menu>
@@ -16,22 +19,22 @@ const MenusManage = () => {
             variant="text"
             size="sm"
           >
-            <box-icon name='dots-vertical-rounded'></box-icon>
+            <box-icon name="dots-vertical-rounded"></box-icon>
           </Button>
         </MenuHandler>
         <MenuList>
           <MenuItem
             className="w-full flex items-center"
-            onClick={() => console.log("Edit")}
+            onClick={() => console.log("Edit", id)}
           >
-            <box-icon name='edit'></box-icon>
+            <box-icon name="edit"></box-icon>
             <span className="ml-3">Edit</span>
           </MenuItem>
           <MenuItem
             className="w-full flex items-center"
-            onClick={() => console.log("Delete")}
+            onClick={() => console.log("Delete", id)}
           >
-            <box-icon name='trash' color="#CC3333" ></box-icon>
+            <box-icon name="trash" color="#CC3333"></box-icon>
             <span className="ml-3 text-red-500">Delete</span>
           </MenuItem>
         </MenuList>
