@@ -4,6 +4,7 @@ import ProjectCard from "../components/ProjectCard";
 import ShortcutMenu from "../components/ShortcutMenu";
 import DropLink from "../components/DropLink";
 import { getDropLinkData } from "../firebase";
+import Nav from "../components/Nav";
 
 function Home() {
   const [fetch, setFetch] = useState(false);
@@ -66,15 +67,20 @@ function Home() {
     );
   };
   return (
-    <div className="min-h-screen	w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
-      <AllLinks />
-      <DropLink
-        modalIsOpen={createPopup}
-        setIsOpen={setCreatePopup}
-        setFetch={setFetch}
-        tagsAlls={tagsAll}
-      />
-      <ShortcutMenu event={setCreatePopup} />
+    <div>
+      <div className="fixed top-0 left-0 right-0 z-50 border-b-2 border-silver">
+        <Nav />
+      </div>
+      <div className="min-h-screen	w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
+        <AllLinks />
+        <DropLink
+          modalIsOpen={createPopup}
+          setIsOpen={setCreatePopup}
+          setFetch={setFetch}
+          tagsAlls={tagsAll}
+        />
+        <ShortcutMenu event={setCreatePopup} />
+      </div>
     </div>
   );
 }
