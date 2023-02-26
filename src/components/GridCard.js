@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MenusManage from "./MenusManage";
 
-const ProjectCard = ({ data, setFetch, searchLink, setSearchLink }) => {
+const GirdCard = ({ data, setFetch, searchLink, setSearchLink }) => {
   const { img, title, description, url, tags } = data;
   const [imageSrc, setImageSrc] = useState(img);
 
@@ -56,4 +56,4 @@ const ProjectCard = ({ data, setFetch, searchLink, setSearchLink }) => {
   );
 };
 
-export default ProjectCard;
+export default GirdCard;
