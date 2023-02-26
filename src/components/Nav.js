@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Menus from "./Menu";
 
-const Nav = ({ setSearchLink }) => {
+const Nav = ({ searchLink, setSearchLink }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
   const handleUpdateSearch = (keyword) => {
@@ -61,6 +61,7 @@ const Nav = ({ setSearchLink }) => {
               type="text"
               placeholder="Search link"
               autoComplete="off"
+              value={searchLink}
               {...register("keyword", {
                 onChange: onChangeKeyword,
               })}

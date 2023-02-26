@@ -80,9 +80,11 @@ function Home() {
                 description: v?.description,
                 url: v?.url,
                 tags: v?.tags,
-                id: v?.createdAt
+                id: v?.createdAt,
               }}
               setFetch={setFetch}
+              setSearchLink={setSearchLink}
+              searchLink={searchLink}
             />
           </div>
         ))}
@@ -92,7 +94,7 @@ function Home() {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 z-50 border-b-2 border-silver">
-        <Nav setSearchLink={setSearchLink} />
+        <Nav  searchLink={searchLink} setSearchLink={setSearchLink} />
       </div>
       <div className="min-h-screen	w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 pt-[70px]">
         <AllLinks />

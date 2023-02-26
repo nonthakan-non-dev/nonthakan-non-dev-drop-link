@@ -1,12 +1,22 @@
 import { useState } from "react";
 import MenusManage from "./MenusManage";
 
-const ProjectCard = ({ data, setFetch }) => {
+const ProjectCard = ({ data, setFetch, searchLink, setSearchLink }) => {
   const { img, title, description, url, tags } = data;
   const [imageSrc, setImageSrc] = useState(img);
 
   const onError = () => {
     setImageSrc(process.env.REACT_APP_NO_IMAGE);
+  };
+
+  const seleteTag = (tag) => {
+    try {
+      if (searchLink === tag) {
+        setSearchLink("");
+      } else {
+        setSearchLink(tag);
+      }
+    } catch (error) {}
   };
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white relative">
@@ -34,7 +44,8 @@ const ProjectCard = ({ data, setFetch }) => {
           {tags.map((v, i) => (
             <span
               key={i}
-              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer select-none"
+              onClick={() => seleteTag(v)}
             >
               {v ?? "-"}
             </span>
