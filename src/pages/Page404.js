@@ -11,7 +11,7 @@ function Page404() {
 
       <div className="w-200 mt-[20px]">
         <Button
-          className="w-200 normal-case border-black text-black"
+          className="w-200 normal-case border-black text-black noSelect"
           variant="outlined"
           size="sm"
           fullWidth

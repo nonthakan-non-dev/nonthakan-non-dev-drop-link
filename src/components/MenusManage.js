@@ -25,7 +25,7 @@ const MenusManage = ({ data, setFetch }) => {
       <Menu>
         <MenuHandler>
           <Button
-            className="w-fit flex justify-center	items-center bg-silver hover:bg-silver"
+            className="w-fit flex justify-center	items-center bg-silver hover:bg-silver select-none noSelect"
             variant="text"
             size="sm"
           >
@@ -34,14 +34,14 @@ const MenusManage = ({ data, setFetch }) => {
         </MenuHandler>
         <MenuList>
           <MenuItem
-            className="w-full flex items-center"
+            className="w-full flex items-center noSelect"
             onClick={() => console.log("Edit", id)}
           >
             <box-icon name="edit"></box-icon>
             <span className="ml-3">Edit</span>
           </MenuItem>
           <MenuItem
-            className="w-full flex items-center"
+            className="w-full flex items-center noSelect"
             onClick={() => deleteDropLink(id)}
           >
             <box-icon name="trash" color="#CC3333"></box-icon>

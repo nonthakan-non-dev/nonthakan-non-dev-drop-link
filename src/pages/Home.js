@@ -162,7 +162,7 @@ function Home() {
           <div>
             {sort ? (
               <Button
-                className="w-fit flex justify-center	items-center"
+                className="w-fit flex justify-center	items-center noSelect"
                 variant="text"
                 size="sm"
                 onClick={() => setSort(false)}
@@ -173,7 +173,7 @@ function Home() {
               </Button>
             ) : (
               <Button
-                className="w-fit flex justify-center	items-center"
+                className="w-fit flex justify-center	items-center noSelect"
                 variant="text"
                 size="sm"
                 onClick={() => setSort(true)}
@@ -188,14 +188,14 @@ function Home() {
         <div>
           {display ? (
             <span
-              className="cursor-pointer select-none"
+              className="cursor-pointer select-none noSelect"
               onClick={() => setDisplay(false)}
             >
               <box-icon name="list-ul"></box-icon>
             </span>
           ) : (
             <span
-              className="cursor-pointer select-none"
+              className="cursor-pointer select-none noSelect"
               onClick={() => setDisplay(true)}
             >
               <box-icon name="grid-horizontal"></box-icon>

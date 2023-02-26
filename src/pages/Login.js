@@ -109,7 +109,7 @@ function Login() {
         </div>
         <div className="flex items-center justify-end">
           <p
-            className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800 cursor-pointer"
+            className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800 cursor-pointer noSelect"
             onClick={forgetPassword}
           >
             Forgot Password?

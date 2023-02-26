@@ -38,7 +38,7 @@ const Nav = ({ searchLink, setSearchLink }) => {
   return (
     <div className="w-full flex flex-row justify-between bg-white min-h-[50px] px-[1%] sm:px-[5%] py-2">
       <div
-        className="flex items-center justify-center ml-3 cursor-pointer w-[15%] sm:w-auto"
+        className="flex items-center justify-center ml-3 cursor-pointer w-[15%] sm:w-auto noSelect"
         onClick={() => navigate("/", { replace: true })}
       >
         <div className="h-[30px]">

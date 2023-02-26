@@ -136,7 +136,7 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
           className="focus:outline-none focus:shadow-outline relative"
         >
           <div
-            className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer"
+            className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer noSelect"
             onClick={handleClose}
           >
             <box-icon name="x-circle" size="md"></box-icon>
@@ -192,7 +192,7 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
               </label>
               <div className="relative">
                 <input
-                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline noSelect"
                   id="tags"
                   type="text"
                   placeholder="e.g. #work #dev"
@@ -205,7 +205,7 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
                   <div className="absolute min-h-fit max-h-[80px] overflow-y-auto bottom-[80px ] left-0 shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white">
                     {tagsShow?.map((v, i) => (
                       <div
-                        className="mb-1 cursor-pointer"
+                        className="mb-1 cursor-pointer noSelect"
                         key={i}
                         onClick={() => {
                           selectTags(v);

@@ -23,7 +23,7 @@ const MenusSort = ({ setSortBy }) => {
         </MenuHandler>
         <MenuList>
           <MenuItem
-            className="w-full flex items-center"
+            className="w-full flex items-center noSelect"
             onClick={() => {
               setIsSortBy("Creation Date");
               setSortBy("createdAt")
@@ -32,7 +32,7 @@ const MenusSort = ({ setSortBy }) => {
             <span className="capitalize">Creation Date</span>
           </MenuItem>
           <MenuItem
-            className="w-full flex items-center"
+            className="w-full flex items-center noSelect"
             onClick={() => {
               setIsSortBy("Last Updated Date");
               setSortBy("updatedAt")
@@ -41,7 +41,7 @@ const MenusSort = ({ setSortBy }) => {
             <span className="capitalize">Last Updated Date</span>
           </MenuItem>
           <MenuItem
-            className="w-full flex items-center"
+            className="w-full flex items-center noSelect"
             onClick={() => {
               setIsSortBy("Title");
               setSortBy("title")

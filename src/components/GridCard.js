@@ -44,7 +44,7 @@ const GirdCard = ({ data, setFetch, searchLink, setSearchLink }) => {
           {tags.map((v, i) => (
             <span
               key={i}
-              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer select-none"
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer select-none noSelect"
               onClick={() => seleteTag(v)}
             >
               {v ?? "-"}
