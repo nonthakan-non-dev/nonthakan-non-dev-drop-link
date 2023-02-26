@@ -18,7 +18,6 @@ function Register() {
       navigate("/", { replace: true })
     } catch (error) {
       Swal.fire({
-        title: "Register failed",
         text: "Email already in use.",
         icon: "error",
         confirmButtonColor: "#3B82F6",

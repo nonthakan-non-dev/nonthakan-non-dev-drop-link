@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import { child, get, getDatabase, ref, remove, set } from "firebase/database";
 import Swal from "sweetalert2";
@@ -67,6 +68,28 @@ const sendPasswordReset = async (email) => {
     });
   }
 };
+
+const changePassword = async (email, oldPassword, newPassword) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, oldPassword).then(() => {
+      updatePassword(auth.currentUser, newPassword).then(() => {
+        Swal.fire({
+          title: "Saved!",
+          icon: "success",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#3B82F6",
+        });
+      });
+    });
+  } catch (error) {
+    Swal.fire({
+      text: `${error?.message ?? ""}`,
+      icon: "error",
+      confirmButtonColor: "#3B82F6",
+    });
+  }
+};
+
 const logout = () => {
   signOut(auth);
 };
@@ -163,9 +186,10 @@ export {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
+  changePassword,
   logout,
   analytics,
   saveLink,
   getDropLinkData,
-  deleteLink
+  deleteLink,
 };

@@ -154,7 +154,7 @@ function Home() {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 z-50 border-b-2 border-silver">
-        <Nav searchLink={searchLink} setSearchLink={setSearchLink} />
+        <Nav searchLink={searchLink} setSearchLink={setSearchLink}/>
       </div>
       <div className="pt-[70px] flex justify-between items-center my-2">
         <div className="flex justify-center items-center">

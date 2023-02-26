@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import Loading from "./pages/Loading";
 import LayoutAuth from "./components/LayoutAuth";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -43,6 +44,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/register" element={<Home />}></Route>
+            <Route exact path="/profile" element={<Profile userData={userData} />}></Route>
             <Route exact path="/*" element={<Page404 />}></Route>
           </Routes>
         </LayoutAuth>

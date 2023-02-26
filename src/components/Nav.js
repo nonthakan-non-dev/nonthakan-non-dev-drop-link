@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Menus from "./Menu";
 
-const Nav = ({ searchLink, setSearchLink }) => {
+const Nav = ({ searchLink, setSearchLink, showNav = true }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
   const handleUpdateSearch = (keyword) => {
@@ -53,40 +53,43 @@ const Nav = ({ searchLink, setSearchLink }) => {
         </h1>
       </div>
 
-      <div className="w-[200px] sm:w-[300px] lg:w-[360px] xl:w-[400px]">
-        <form className="w-full md:w-full" onSubmit={handleSubmit(onSubmit)}>
-          <div className="relative">
-            <div className="absolute left-0 py-2 px-3">
-              <box-icon name="search" color="#D1D2D5"></box-icon>
-            </div>
-            {searchLink?.length > 0 && (
-              <div
-                className="absolute right-0 py-2 px-3 cursor-pointer noSelect"
-                onClick={() => {
-                  setSearchLink("");
-                }}
-              >
-                <box-icon name="x" color="#D1D2D5"></box-icon>
+      {showNav && (
+        <div className="w-[200px] sm:w-[300px] lg:w-[360px] xl:w-[400px]">
+          <form className="w-full md:w-full" onSubmit={handleSubmit(onSubmit)}>
+            <div className="relative">
+              <div className="absolute left-0 py-2 px-3">
+                <box-icon name="search" color="#D1D2D5"></box-icon>
               </div>
-            )}
-            <input
-              className="appearance-none border rounded-lg w-full py-2  px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Search link"
-              autoComplete="off"
-              value={searchLink}
-              {...register("keyword", {
-                onChange: onChangeKeyword,
-              })}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-xs italic mt-3">
-                {errors?.email?.message}
-              </p>
-            )}
-          </div>
-        </form>
-      </div>
+              {searchLink?.length > 0 && (
+                <div
+                  className="absolute right-0 py-2 px-3 cursor-pointer noSelect"
+                  onClick={() => {
+                    setSearchLink("");
+                  }}
+                >
+                  <box-icon name="x" color="#D1D2D5"></box-icon>
+                </div>
+              )}
+              <input
+                className="appearance-none border rounded-lg w-full py-2  px-12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Search link"
+                autoComplete="off"
+                value={searchLink}
+                {...register("keyword", {
+                  onChange: onChangeKeyword,
+                })}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs italic mt-3">
+                  {errors?.email?.message}
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      )}
+
       <div className="w-[15%] sm:w-auto">
         <Menus />
       </div>

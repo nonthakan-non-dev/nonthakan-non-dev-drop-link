@@ -23,19 +23,13 @@ const Menus = () => {
           </Button>
         </MenuHandler>
         <MenuList>
-          <MenuItem
-            className="w-full flex items-center noSelect"
-            onClick={() => navigate("/", { replace: true })}
-          >
-            <box-icon name="home"></box-icon>
-            <span className="ml-3">Home</span>
-          </MenuItem>
+   
           <MenuItem
             className="w-full flex items-center noSelect"
             onClick={() => navigate("/profile", { replace: true })}
           >
             <box-icon name="user"></box-icon>
-            <span className="ml-3">About</span>
+            <span className="ml-3">Profile</span>
           </MenuItem>
           <MenuItem
             className="w-full flex items-center noSelect"
