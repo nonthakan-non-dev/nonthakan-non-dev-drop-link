@@ -25,7 +25,7 @@ const MenusManage = ({ data, setFetch }) => {
       <Menu>
         <MenuHandler>
           <Button
-            className="w-fit flex justify-center	items-center"
+            className="w-fit flex justify-center	items-center bg-silver hover:bg-silver"
             variant="text"
             size="sm"
           >
