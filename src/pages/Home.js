@@ -6,6 +6,8 @@ import DropLink from "../components/DropLink";
 import { getDropLinkData } from "../firebase";
 import Nav from "../components/Nav";
 import ListCard from "../components/ListCard";
+import MenusSort from "../components/MenuSort";
+import { Button } from "@material-tailwind/react";
 
 function Home() {
   const [fetch, setFetch] = useState(false);
@@ -14,6 +16,8 @@ function Home() {
   const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
   const [dropLinkDataRawShow, setDropLinkDataRawShow] = useState([]);
   const [display, setDisplay] = useState(true);
+  const [sort, setSort] = useState(true);
+  const [sortBy, setSortBy] = useState("createdAt");
 
   const [searchLink, setSearchLink] = useState("");
 
@@ -36,7 +40,7 @@ function Home() {
         dataAll.push({ tags: arrayTags, ...data });
       }
       setTagsAll(_.uniq(tagsRaws));
-      setDropLinkDataRaw(dataAll.reverse());
+      setDropLinkDataRaw(dataAll);
     } catch (error) {
       console.error(error);
     }
@@ -49,6 +53,8 @@ function Home() {
   useEffect(() => {
     const fetchGetDropLinkDataShow = () => {
       try {
+        let dataForShow = [];
+
         if (searchLink?.length > 0) {
           const filterDropLinkDataRaw = _.filter(dropLinkDataRaw, function (v) {
             return (
@@ -59,16 +65,42 @@ function Home() {
                 .includes(searchLink?.toLowerCase())
             );
           });
-          setDropLinkDataRawShow(filterDropLinkDataRaw);
+          dataForShow = filterDropLinkDataRaw;
         } else {
-          setDropLinkDataRawShow(dropLinkDataRaw);
+          dataForShow = dropLinkDataRaw;
         }
+
+        if (sortBy === "createdAt") {
+          if (sort) {
+            dataForShow = _.sortBy(dataForShow, ["createdAt"]).reverse();
+          }else{
+            dataForShow = _.sortBy(dataForShow, ["createdAt"]);
+          }
+        }
+
+        if (sortBy === "updatedAt") {
+          if (sort) {
+            dataForShow = _.sortBy(dataForShow, ["updatedAt"]).reverse();
+          }else{
+            dataForShow = _.sortBy(dataForShow, ["updatedAt"]);
+          }
+        }
+
+        if (sortBy === "title") {
+          if (sort) {
+            dataForShow = _.sortBy(dataForShow, ["title"]).reverse();
+          }else{
+            dataForShow = _.sortBy(dataForShow, ["title"]);
+          }
+        }
+
+        setDropLinkDataRawShow(dataForShow);
       } catch (error) {
         console.error(error);
       }
     };
     fetchGetDropLinkDataShow();
-  }, [searchLink, dropLinkDataRaw]);
+  }, [searchLink, sort, sortBy, dropLinkDataRaw]);
 
   const AllLinks = () => {
     return (
@@ -125,9 +157,33 @@ function Home() {
         <Nav searchLink={searchLink} setSearchLink={setSearchLink} />
       </div>
       <div className="pt-[70px] flex justify-between items-center my-2">
-        <div>
-          <box-icon name="sort-up"></box-icon>
-          <box-icon name="sort-down"></box-icon>
+        <div className="flex justify-center items-center">
+          <MenusSort setSortBy={setSortBy} />
+          <div>
+            {sort ? (
+              <Button
+                className="w-fit flex justify-center	items-center"
+                variant="text"
+                size="sm"
+                onClick={() => setSort(false)}
+              >
+                <span>
+                  <box-icon name="sort-up"></box-icon>
+                </span>
+              </Button>
+            ) : (
+              <Button
+                className="w-fit flex justify-center	items-center"
+                variant="text"
+                size="sm"
+                onClick={() => setSort(true)}
+              >
+                <span>
+                  <box-icon name="sort-down"></box-icon>
+                </span>
+              </Button>
+            )}
+          </div>
         </div>
         <div>
           {display ? (
