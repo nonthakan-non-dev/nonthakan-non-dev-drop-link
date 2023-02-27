@@ -1,6 +1,6 @@
 import MenusManage from "./MenusManage";
 
-const ListCard = ({ data, setFetch, searchLink, setSearchLink }) => {
+const ListCard = ({ data, setFetch, searchLink, setSearchLink, setUpdatePopup }) => {
   const { title, description, url, tags } = data;
   const seleteTag = (tag) => {
     try {
@@ -14,7 +14,7 @@ const ListCard = ({ data, setFetch, searchLink, setSearchLink }) => {
   return (
     <div className="w-full rounded-lg overflow-hidden shadow-lg bg-white relative">
       <div className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer">
-        <MenusManage data={data} setFetch={setFetch} />
+        <MenusManage data={data} setFetch={setFetch} setUpdatePopup={setUpdatePopup} />
       </div>
       <a href={url} target="_blank" rel="noreferrer">
         <div className="px-6 py-4">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MenusManage from "./MenusManage";
 
-const GirdCard = ({ data, setFetch, searchLink, setSearchLink }) => {
+const GirdCard = ({ data, setFetch, searchLink, setSearchLink, setUpdatePopup }) => {
   const { img, title, description, url, tags } = data;
   const [imageSrc, setImageSrc] = useState(img);
 
@@ -21,7 +21,7 @@ const GirdCard = ({ data, setFetch, searchLink, setSearchLink }) => {
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white relative">
       <div className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer">
-        <MenusManage data={data} setFetch={setFetch} />
+        <MenusManage data={data} setFetch={setFetch} setUpdatePopup={setUpdatePopup} />
       </div>
       <a href={url} target="_blank" rel="noreferrer">
         <img

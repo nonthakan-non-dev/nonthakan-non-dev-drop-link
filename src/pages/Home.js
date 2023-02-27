@@ -8,11 +8,13 @@ import Nav from "../components/Nav";
 import ListCard from "../components/ListCard";
 import MenusSort from "../components/MenuSort";
 import { Button } from "@material-tailwind/react";
+import UpdateDropLink from "../components/UpdateDropLink";
 
 function Home() {
   const [fetch, setFetch] = useState(false);
   const [tagsAll, setTagsAll] = useState([]);
   const [createPopup, setCreatePopup] = useState(false);
+  const [updatePopup, setUpdatePopup] = useState({});
   const [dropLinkDataRaw, setDropLinkDataRaw] = useState([]);
   const [dropLinkDataRawShow, setDropLinkDataRawShow] = useState([]);
   const [display, setDisplay] = useState(true);
@@ -73,7 +75,7 @@ function Home() {
         if (sortBy === "createdAt") {
           if (sort) {
             dataForShow = _.sortBy(dataForShow, ["createdAt"]).reverse();
-          }else{
+          } else {
             dataForShow = _.sortBy(dataForShow, ["createdAt"]);
           }
         }
@@ -81,7 +83,7 @@ function Home() {
         if (sortBy === "updatedAt") {
           if (sort) {
             dataForShow = _.sortBy(dataForShow, ["updatedAt"]).reverse();
-          }else{
+          } else {
             dataForShow = _.sortBy(dataForShow, ["updatedAt"]);
           }
         }
@@ -89,7 +91,7 @@ function Home() {
         if (sortBy === "title") {
           if (sort) {
             dataForShow = _.sortBy(dataForShow, ["title"]).reverse();
-          }else{
+          } else {
             dataForShow = _.sortBy(dataForShow, ["title"]);
           }
         }
@@ -121,6 +123,7 @@ function Home() {
                   setFetch={setFetch}
                   setSearchLink={setSearchLink}
                   searchLink={searchLink}
+                  setUpdatePopup={setUpdatePopup}
                 />
               </div>
             ))}
@@ -143,6 +146,7 @@ function Home() {
                   setFetch={setFetch}
                   setSearchLink={setSearchLink}
                   searchLink={searchLink}
+                  setUpdatePopup={setUpdatePopup}
                 />
               </div>
             ))}
@@ -154,7 +158,7 @@ function Home() {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 z-50 border-b-2 border-silver">
-        <Nav searchLink={searchLink} setSearchLink={setSearchLink}/>
+        <Nav searchLink={searchLink} setSearchLink={setSearchLink} />
       </div>
       <div className="pt-[70px] flex justify-between items-center my-2">
         <div className="flex justify-center items-center">
@@ -211,6 +215,13 @@ function Home() {
         setIsOpen={setCreatePopup}
         setFetch={setFetch}
         tagsAlls={tagsAll}
+      />
+      <UpdateDropLink
+        modalIsOpen={!_.isEmpty(updatePopup)}
+        setIsOpen={setUpdatePopup}
+        setFetch={setFetch}
+        tagsAlls={tagsAll}
+        data={updatePopup}
       />
       <ShortcutMenu event={setCreatePopup} />
     </div>

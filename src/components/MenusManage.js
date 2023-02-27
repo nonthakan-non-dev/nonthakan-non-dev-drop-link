@@ -7,9 +7,8 @@ import {
 } from "@material-tailwind/react";
 import { deleteLink } from "../firebase";
 
-const MenusManage = ({ data, setFetch }) => {
-  // eslint-disable-next-line
-  const { img, title, description, url, tags, id } = data;
+const MenusManage = ({ data, setFetch, setUpdatePopup }) => {
+  const {id } = data;
 
   const deleteDropLink = async (id) => {
     try {
@@ -35,7 +34,9 @@ const MenusManage = ({ data, setFetch }) => {
         <MenuList>
           <MenuItem
             className="w-full flex items-center noSelect"
-            onClick={() => console.log("Edit", id)}
+            onClick={() => {
+              setUpdatePopup(data);
+            }}
           >
             <box-icon name="edit"></box-icon>
             <span className="ml-3">Edit</span>
