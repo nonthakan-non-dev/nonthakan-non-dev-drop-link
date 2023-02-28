@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { saveLink } from "../firebase";
+import { updateLink } from "../firebase";
 
 const UpdateDropLink = ({
   modalIsOpen,
@@ -49,26 +48,13 @@ const UpdateDropLink = ({
     setImageSrc(img);
     // eslint-disable-next-line
   }, [id]);
-  const getLinkPreview = async (url) => {
-    try {
-      return axios.get(`${process.env.REACT_APP_LINKPREVIEW_ENDPOINT}${url}`);
-    } catch (error) {}
-  };
   const onSubmit = async (data) => {
     try {
       handleClose();
-      const dataLinkPreviewRaw = await getLinkPreview(data?.url);
-      const { url, ...dataLinkPreview } = dataLinkPreviewRaw?.data;
-      await saveLink({
-        url: data?.url,
-        tags: data?.tags,
-        ...dataLinkPreview,
-      });
+      data["image"] = img;
+      await updateLink(id, data);
     } catch (error) {
-      await saveLink({
-        url: data?.url,
-        tags: data?.tags,
-      });
+      console.error(error);
     }
     setFetch((i) => !i);
     clearForm();
@@ -191,7 +177,7 @@ const UpdateDropLink = ({
                 readOnly
                 placeholder="https://www.link.com"
                 {...register("url", {
-                  disabled: true,
+                  readOnly: true,
                 })}
               />
               {errors.url && (
@@ -222,7 +208,10 @@ const UpdateDropLink = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm mb-2" htmlFor="description">
+              <label
+                className="block text-gray-700 text-sm mb-2"
+                htmlFor="description"
+              >
                 Description
               </label>
               <textarea

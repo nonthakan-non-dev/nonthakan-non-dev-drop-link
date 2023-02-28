@@ -128,6 +128,42 @@ const saveLink = async (data) => {
     });
   }
 };
+
+const updateLink = async (id, data) => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const userId = user.uid;
+    const timestamp = id;
+    if (!user) {
+      Swal.fire({
+        text: "Access Denied/Forbidden 403",
+        icon: "error",
+        confirmButtonColor: "#3B82F6",
+      });
+      return;
+    }
+
+    await set(ref(db, `dropLink/${userId}/${timestamp}`), {
+      ...data,
+      createdAt: timestamp,
+    });
+
+    Swal.fire({
+      title: "Saved!",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3B82F6",
+    });
+  } catch (error) {
+    Swal.fire({
+      text: `${error?.message ?? ""}`,
+      icon: "error",
+      confirmButtonColor: "#3B82F6",
+    });
+  }
+};
+
 const getDropLinkData = async () => {
   try {
     const auth = getAuth();
@@ -192,4 +228,5 @@ export {
   saveLink,
   getDropLinkData,
   deleteLink,
+  updateLink,
 };
