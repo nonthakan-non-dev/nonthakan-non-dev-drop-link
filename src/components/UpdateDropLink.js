@@ -151,9 +151,12 @@ const UpdateDropLink = ({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={style} className="focus:outline-none focus:shadow-outline">
+        <div
+          style={style}
+          className="focus:outline-none focus:shadow-outline h-[80%] md:h-auto  w-[80%] md:max-w-[60%] lg:w-[30%]"
+        >
           <form
-            className="bg-white border-0 rounded-lg px-8 pt-6 pb-8 mb-4 w-full h-full"
+            className="bg-white border-0 rounded-lg px-8 pt-6 pb-8 mb-4 w-full overflow-y-auto h-full"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex items-center justify-center mb-8">
@@ -209,22 +212,22 @@ const UpdateDropLink = ({
                 className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="title"
                 type="text"
-                {...register("description")}
+                {...register("title")}
               />
-              {errors.description && (
+              {errors.title && (
                 <p className="text-red-500 text-xs italic mt-3">
-                  {errors?.description?.message}
+                  {errors?.title?.message}
                 </p>
               )}
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm mb-2" htmlFor="des">
+              <label className="block text-gray-700 text-sm mb-2" htmlFor="description">
                 Description
               </label>
               <textarea
                 className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="des"
+                id="description"
                 type="text"
                 {...register("description")}
               />
