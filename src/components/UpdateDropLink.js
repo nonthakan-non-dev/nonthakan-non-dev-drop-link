@@ -42,6 +42,8 @@ const UpdateDropLink = ({
     const setForm = () => {
       setValue("url", url ?? "");
       setValue("tags", tags ?? "");
+      setValue("title", title ?? "");
+      setValue("description", description ?? "");
     };
     setForm();
     setImageSrc(img);
@@ -149,16 +151,7 @@ const UpdateDropLink = ({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div
-          style={style}
-          className="focus:outline-none focus:shadow-outline relative"
-        >
-          <div
-            className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer noSelect"
-            onClick={handleClose}
-          >
-            <box-icon name="x-circle" size="md"></box-icon>
-          </div>
+        <div style={style} className="focus:outline-none focus:shadow-outline">
           <form
             className="bg-white border-0 rounded-lg px-8 pt-6 pb-8 mb-4 w-full h-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -175,16 +168,15 @@ const UpdateDropLink = ({
                 Drop Link
               </h1>
             </div>
-
             <div className="mb-4">
-              <div className="mb-4">
-                <img
-                  className="w-full rounded-lg"
-                  src={imageSrc ?? process.env.REACT_APP_NO_IMAGE}
-                  onError={onError}
-                  alt={title ?? "-"}
-                />
-              </div>
+              <img
+                className="w-full rounded-lg"
+                src={imageSrc ?? process.env.REACT_APP_NO_IMAGE}
+                onError={onError}
+                alt={title ?? "-"}
+              />
+            </div>
+            <div className="mb-4">
               <label className="block text-gray-700 text-sm mb-2" htmlFor="url">
                 Url
               </label>
@@ -192,15 +184,11 @@ const UpdateDropLink = ({
                 className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="url"
                 type="text"
+                disabled
+                readOnly
                 placeholder="https://www.link.com"
                 {...register("url", {
-                  required: "Please type your email.",
-                  pattern: {
-                    value:
-                      // eslint-disable-next-line
-                      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm,
-                    message: "Invalid type url!",
-                  },
+                  disabled: true,
                 })}
               />
               {errors.url && (
@@ -209,6 +197,44 @@ const UpdateDropLink = ({
                 </p>
               )}
             </div>
+
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm mb-2"
+                htmlFor="title"
+              >
+                Title
+              </label>
+              <input
+                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="title"
+                type="text"
+                {...register("description")}
+              />
+              {errors.description && (
+                <p className="text-red-500 text-xs italic mt-3">
+                  {errors?.description?.message}
+                </p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm mb-2" htmlFor="des">
+                Description
+              </label>
+              <textarea
+                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="des"
+                type="text"
+                {...register("description")}
+              />
+              {errors.description && (
+                <p className="text-red-500 text-xs italic mt-3">
+                  {errors?.description?.message}
+                </p>
+              )}
+            </div>
+
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm mb-2"
@@ -249,9 +275,16 @@ const UpdateDropLink = ({
                 </p>
               )}
             </div>
-            <div className="w-full mt-5">
+            <div className="w-full mt-5 flex justify-between">
               <button
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                className="w-[48%] bg-gray-200 hover:bg-gray-500 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                type="button"
+                onClick={handleClose}
+              >
+                Cancel
+              </button>
+              <button
+                className="w-[48%] bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Save
