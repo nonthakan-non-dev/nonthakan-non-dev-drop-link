@@ -8,7 +8,7 @@ import { saveLink } from "../firebase";
 const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
   const [tagsCursor, setTagsCursor] = useState({ start: null, end: null });
   const [
-    tagsAll, 
+    tagsAll,
     // eslint-disable-next-line
     setTagsAll,
   ] = useState(tagsAlls);
@@ -131,16 +131,7 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div
-          style={style}
-          className="focus:outline-none focus:shadow-outline relative"
-        >
-          <div
-            className="absolute right-0 top-0 pt-1 pr-1 cursor-pointer noSelect"
-            onClick={handleClose}
-          >
-            <box-icon name="x-circle" size="md"></box-icon>
-          </div>
+        <div style={style} className="focus:outline-none focus:shadow-outline">
           <form
             className="bg-white border-0 rounded-lg px-8 pt-6 pb-8 mb-4 w-full h-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -223,9 +214,16 @@ const DropLink = ({ modalIsOpen, setIsOpen, setFetch, tagsAlls }) => {
                 </p>
               )}
             </div>
-            <div className="w-full mt-5">
+            <div className="w-full mt-5 flex justify-between">
               <button
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                className="w-[48%] bg-gray-200 hover:bg-gray-500 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                type="button"
+                onClick={handleClose}
+              >
+                Cancel
+              </button>
+              <button
+                className="w-[48%] bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Save
